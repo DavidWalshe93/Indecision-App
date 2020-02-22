@@ -10,6 +10,11 @@ let template = (
             <li>Item One</li>
             <li>Item Two</li>
         </ol>
+        <div>
+            <h1>Dave Walshe</h1>
+            <p>Age: 26</p>
+            <p>Location: Ireland</p>
+        </div>
     </div>
 );
 let appRoot = document.getElementById("app");

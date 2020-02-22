@@ -30,6 +30,25 @@ var template = React.createElement(
             null,
             "Item Two"
         )
+    ),
+    React.createElement(
+        "div",
+        null,
+        React.createElement(
+            "h1",
+            null,
+            "Dave Walshe"
+        ),
+        React.createElement(
+            "p",
+            null,
+            "Age: 26"
+        ),
+        React.createElement(
+            "p",
+            null,
+            "Location: Ireland"
+        )
     )
 );
 var appRoot = document.getElementById("app");
