@@ -4,52 +4,39 @@
 console.log("Here");
 
 // JSX - Javascript XML
+
+var user = {
+    // name: "Mike",
+    age: 27,
+    location: "Ireland"
+};
+
+var getLocation = function getLocation(location) {
+    if (location !== undefined) {
+        return React.createElement(
+            "p",
+            null,
+            "Location: ",
+            location
+        );
+    }
+};
+
 var template = React.createElement(
     "div",
     null,
     React.createElement(
         "h1",
         null,
-        "Indecision App"
+        user.name ? user.name : "Anonymous"
     ),
-    React.createElement(
+    user.age && user.age >= 18 && React.createElement(
         "p",
         null,
-        "DOes this change"
+        "Age: ",
+        user.age
     ),
-    React.createElement(
-        "ol",
-        null,
-        React.createElement(
-            "li",
-            null,
-            "Item One"
-        ),
-        React.createElement(
-            "li",
-            null,
-            "Item Two"
-        )
-    ),
-    React.createElement(
-        "div",
-        null,
-        React.createElement(
-            "h1",
-            null,
-            "Dave Walshe"
-        ),
-        React.createElement(
-            "p",
-            null,
-            "Age: 26"
-        ),
-        React.createElement(
-            "p",
-            null,
-            "Location: Ireland"
-        )
-    )
+    getLocation(user.location)
 );
 var appRoot = document.getElementById("app");
 

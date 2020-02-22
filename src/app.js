@@ -2,19 +2,24 @@
 console.log("Here");
 
 // JSX - Javascript XML
+
+let user = {
+    // name: "Mike",
+    age: 27,
+    location: "Ireland"
+};
+
+const getLocation = (location) => {
+    if (location !== undefined) {
+        return <p>Location: {location}</p>;
+    }
+};
+
 let template = (
     <div>
-        <h1>Indecision App</h1>
-        <p>DOes this change</p>
-        <ol>
-            <li>Item One</li>
-            <li>Item Two</li>
-        </ol>
-        <div>
-            <h1>Dave Walshe</h1>
-            <p>Age: 26</p>
-            <p>Location: Ireland</p>
-        </div>
+        <h1>{user.name ? user.name : "Anonymous"}</h1>
+        {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
+        {getLocation(user.location)}
     </div>
 );
 let appRoot = document.getElementById("app");
