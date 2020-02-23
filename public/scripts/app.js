@@ -1,43 +1,63 @@
 "use strict";
 
 // Created by David Walshe on 22/02/2020
-console.log("Here");
 
 // JSX - Javascript XML
 
-var user = {
-    // name: "Mike",
-    age: 27,
-    location: "Ireland"
+var count = 0;
+
+// Event Listeners
+var addOne = function addOne() {
+    count++;
+    console.log("addOne");
+    renderCounderApp();
 };
 
-var getLocation = function getLocation(location) {
-    if (location !== undefined) {
-        return React.createElement(
-            "p",
-            null,
-            "Location: ",
-            location
-        );
-    }
+var minusOne = function minusOne() {
+    count--;
+    console.log("minusOne");
+    renderCounderApp();
 };
 
-var template = React.createElement(
-    "div",
-    null,
-    React.createElement(
-        "h1",
-        null,
-        user.name ? user.name : "Anonymous"
-    ),
-    user.age && user.age >= 18 && React.createElement(
-        "p",
-        null,
-        "Age: ",
-        user.age
-    ),
-    getLocation(user.location)
-);
+var reset = function reset() {
+    count = 0;
+    console.log("reset");
+    renderCounderApp();
+};
+
+// Get the root HTML for the react app to run in.
 var appRoot = document.getElementById("app");
 
-ReactDOM.render(template, appRoot);
+// Setup basic re-render function
+var renderCounterApp = function renderCounterApp() {
+    var template = React.createElement(
+        "div",
+        null,
+        React.createElement(
+            "h1",
+            null,
+            "Count: ",
+            count
+        ),
+        React.createElement(
+            "button",
+            { onClick: addOne },
+            "+1"
+        ),
+        React.createElement(
+            "button",
+            { onClick: minusOne },
+            "-1"
+        ),
+        React.createElement(
+            "button",
+            { onClick: reset },
+            "reset"
+        )
+    );
+
+    ReactDOM.render(template, appRoot);
+};
+
+// Initial render
+renderCounderApp();

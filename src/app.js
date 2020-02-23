@@ -1,27 +1,44 @@
 // Created by David Walshe on 22/02/2020
-console.log("Here");
 
 // JSX - Javascript XML
 
-let user = {
-    // name: "Mike",
-    age: 27,
-    location: "Ireland"
+let count = 0;
+
+// Event Listeners
+const addOne = () => {
+    count++;
+    console.log("addOne");
+    renderCounderApp();
 };
 
-const getLocation = (location) => {
-    if (location !== undefined) {
-        return <p>Location: {location}</p>;
-    }
+const minusOne = () => {
+    count--;
+    console.log("minusOne");
+    renderCounderApp();
 };
 
-let template = (
-    <div>
-        <h1>{user.name ? user.name : "Anonymous"}</h1>
-        {(user.age && user.age >= 18) && <p>Age: {user.age}</p>}
-        {getLocation(user.location)}
-    </div>
-);
+const reset = () => {
+    count = 0;
+    console.log("reset");
+    renderCounderApp();
+};
+
+// Get the root HTML for the react app to run in.
 let appRoot = document.getElementById("app");
 
-ReactDOM.render(template, appRoot);
+// Setup basic re-render function
+const renderCounterApp = () => {
+    const template = (
+        <div>
+            <h1>Count: {count}</h1>
+            <button onClick={addOne}>+1</button>
+            <button onClick={minusOne}>-1</button>
+            <button onClick={reset}>reset</button>
+        </div>
+    );
+
+    ReactDOM.render(template, appRoot);
+};
+
+// Initial render
+renderCounderApp();
