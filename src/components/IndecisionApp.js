@@ -8,20 +8,9 @@ import Header from "./Header";
 
 class IndecisionApp extends React.Component {
 
-
-    // Life-cycle Method
-    constructor(props) {
-        super(props);
-        // Reattach bindings
-        this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-        this.handleAddOption = this.handleAddOption.bind(this);
-        this.handlePick = this.handlePick.bind(this);
-        this.handleDeleteOptionSingular = this.handleDeleteOptionSingular.bind(this);
-        // Set init state.
-        this.state = {
-            options: props.options
-        }
-    }
+    state = {
+        options: this.props.options
+    };
 
     // Reload app data on mount
     componentDidMount() {
@@ -54,19 +43,19 @@ class IndecisionApp extends React.Component {
 
 
     // Removes all options
-    handleDeleteOptions() {
+    handleDeleteOptions = () => {
         this.setState(() => ({options: []}));
-    }
+    };
 
     // Removes a single option
-    handleDeleteOptionSingular(optionToRemove) {
+    handleDeleteOptionSingular = (optionToRemove) => {
         this.setState((prevState) => ({
             options: prevState.options.filter((option) => (option !== optionToRemove))
         }));
-    }
+    };
 
     // Adds an option
-    handleAddOption(option) {
+    handleAddOption = (option) => {
         if (!option) {
             return "Enter valid value to add item"
         } else if (this.state.options.indexOf(option) > -1) {
@@ -76,15 +65,15 @@ class IndecisionApp extends React.Component {
                 options: prevState.options.concat(option)
             })
         )
-    }
+    };
 
     // Selects a item in the array.
-    handlePick() {
+    handlePick = () => {
         const randomNum = Math.floor(Math.random() * this.state.options.length);
         const option = this.state.options[randomNum];
 
         alert(option);
-    }
+    };
 
     render() {
         const title = "Indecision";

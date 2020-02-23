@@ -5,3 +5,16 @@ import ReactDOM from "react-dom";
 import IndecisionApp from "./components/IndecisionApp";
 
 ReactDOM.render(<IndecisionApp options={["Thing one", "Thing two", "Thing three"]}/>, document.getElementById("app"));
+
+class OldSyntax {
+    constructor() {
+        this.name = "Mike";
+    }
+}
+
+class NewSyntax {
+    name = "Jen";
+    getGreeting = () => {
+
+    }
+}
