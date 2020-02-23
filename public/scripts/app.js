@@ -4,60 +4,86 @@
 
 // JSX - Javascript XML
 
-var count = 0;
-
-// Event Listeners
-var addOne = function addOne() {
-    count++;
-    console.log("addOne");
-    renderCounderApp();
+var app = {
+    title: "Indecision App",
+    subtitle: "Put your life in the hands of a computer",
+    options: ["One", "Two"]
 };
 
-var minusOne = function minusOne() {
-    count--;
-    console.log("minusOne");
-    renderCounderApp();
+var onFormSubmit = function onFormSubmit(e) {
+    e.preventDefault();
+
+    var option = e.target.elements.option.value;
+
+    if (option) {
+        app.options.push(option);
+        e.target.elements.option.value = "";
+        render();
+    }
 };
 
-var reset = function reset() {
-    count = 0;
-    console.log("reset");
-    renderCounderApp();
+var removeAll = function removeAll() {
+    app.options = [];
+    render();
 };
 
 // Get the root HTML for the react app to run in.
 var appRoot = document.getElementById("app");
 
-// Setup basic re-render function
-var renderCounterApp = function renderCounterApp() {
+var render = function render() {
     var template = React.createElement(
         "div",
         null,
         React.createElement(
             "h1",
             null,
-            "Count: ",
-            count
+            app.title
+        ),
+        app.subtitle && React.createElement(
+        "p",
+        null,
+        app.subtitle
+        ),
+        React.createElement(
+            "p",
+            null,
+            app.options.length > 0 ? "Here are your options" : "No options"
+        ),
+        React.createElement(
+            "p",
+            null,
+            app.options.length
         ),
         React.createElement(
             "button",
-            { onClick: addOne },
-            "+1"
+            {onClick: removeAll},
+            "Remove all"
         ),
         React.createElement(
-            "button",
-            { onClick: minusOne },
-            "-1"
+            "ol",
+            null,
+            app.options.map(function (option) {
+                return React.createElement(
+                    "li",
+                    {key: option},
+                    "Option: ",
+                    option
+                );
+            })
         ),
         React.createElement(
-            "button",
-            { onClick: reset },
-            "reset"
+            "form",
+            {onSubmit: onFormSubmit},
+            React.createElement("input", {type: "type", name: "option"}),
+            React.createElement(
+                "button",
+                null,
+                "Add Option"
+            )
         )
     );
 
     ReactDOM.render(template, appRoot);
 };
 
-// Initial render
-renderCounderApp();
+render();
