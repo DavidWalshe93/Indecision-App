@@ -41,4 +41,4 @@ const renderCounterApp = () => {
 };
 
 // Initial render
-renderCounderApp();
+renderCounterApp();
