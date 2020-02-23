@@ -4,6 +4,8 @@
 
 class IndecisionApp extends React.Component {
 
+
+    // Life-cycle Method
     constructor(props) {
         super(props);
         // Reattach bindings
@@ -15,8 +17,37 @@ class IndecisionApp extends React.Component {
         this.state = {
             options: props.options
         }
+    }
+
+    // Reload app data on mount
+    componentDidMount() {
+
+        try {
+            const json = localStorage.getItem("options");
+            const options = JSON.parse(json);
+
+            if (options) {
+                this.setState(() => ({options}));
+            }
+        } catch (e) {
+
+        }
 
     }
+
+    // Persist app data on a user update
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.options.length !== this.state.options.length) {
+            const json = JSON.stringify(this.state.options);
+            localStorage.setItem("options", json);
+        }
+        console.log("saving data");
+    }
+
+    componentWillUnmount() {
+        console.log("componentWIllUnmount");
+    }
+
 
     // Removes all options
     handleDeleteOptions() {
@@ -38,7 +69,7 @@ class IndecisionApp extends React.Component {
             return "This option already exists"
         }
         this.setState((prevState) => ({
-                options: prevState.options.concat(option)
+            options: prevState.options.concat(option)
             })
         )
     }
@@ -106,6 +137,7 @@ const Options = (props) => {
     return (
         <div>
             <button onClick={props.handleDeleteOptions}>Remove all options</button>
+            {props.options.length === 0 && <p>Please add an option to get started</p>}
             {
                 props.options.map((option) => (
                     <Option
@@ -148,6 +180,11 @@ class AddOptions extends React.Component {
         const error = this.props.handleAddOption(option);
 
         this.setState(() => ({error}));
+
+        // Clear input when item is valid.
+        if (!error) {
+            e.target.elements.option.value = "";
+        }
     }
 
     render() {
