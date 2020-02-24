@@ -14,10 +14,16 @@ export default class OptionModal extends React.Component {
             isOpen={!!this.props.selectedOption}
             onRequestClose={this.props.handleCloseModal}
             contentLabel="Selected Option"
+            closeTimeoutMS={200}
+            className={"modal"}
         >
-            <h3>Selected Option</h3>
-            {this.props.selectedOption && <p>{this.props.selectedOption}</p>}
-            <button onClick={this.props.handleCloseModal}>Okay</button>
+            <h3 className={"modal__title"}>Selected Option</h3>
+            {this.props.selectedOption && <p className={"modal__body"}>{this.props.selectedOption}</p>}
+            <button
+                onClick={this.props.handleCloseModal}
+                className={"button"}
+            >Okay
+            </button>
         </Modal>
     );
 }
